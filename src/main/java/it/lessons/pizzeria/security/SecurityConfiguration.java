@@ -22,6 +22,8 @@ public class SecurityConfiguration {
 			.requestMatchers("/pizze","/pizze/**").hasAnyAuthority("USER", "ADMIN")  //va tutto in ordine gerarchico, le cose da tenere chiuse vanno sopra, qui è quel che rimane ossia solo read
 			.requestMatchers("/**").permitAll()
 			.and().formLogin()
+            	.defaultSuccessUrl("/pizze", true)
+			.and().formLogin()
 			.and().logout()
 			.and().exceptionHandling();
 		
