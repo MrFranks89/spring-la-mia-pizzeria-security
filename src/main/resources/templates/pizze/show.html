@@ -81,7 +81,8 @@
 			background-color: #f1f1f1;
 		}
 
-		.table th, .table td {
+		.table th,
+		.table td {
 			padding: 10px;
 			text-align: left;
 			font-size: 1rem;
@@ -143,7 +144,8 @@
 						</dl>
 
 						<div class="d-flex justify-content-between mt-4">
-							<a class="btn btn-success" th:href="@{|/pizze/edit/${pizza.id}|} sec:authorize="hasAuthority('ADMIN')"">
+							<a class="btn btn-success" th:href="@{|/pizze/edit/${pizza.id}|}"
+								sec:authorize="hasAuthority('ADMIN')">
 								<i class="fas fa-edit"></i> Modifica
 							</a>
 							<form id="delete-pizza" th:action="@{'/pizze/delete/{id}'(id=${pizza.id})}" method="post"
@@ -158,7 +160,7 @@
 				</div>
 			</div>
 
-			<div class="container ">
+			<div class="container">
 				<table class="content table table-striped">
 					<thead>
 						<tr>
@@ -183,9 +185,11 @@
 							</td>
 							<td th:text="${offerta.titolo}">
 							</td>
-							<td><a class="btn btn-success" th:href="@{/offerte/edit/{id}(id=${offerta.id})}">
-									<i class="fas fa-edit"></i></td>
-							</a>
+							<td>
+								<a class="btn btn-success" th:href="@{/offerte/edit/{id}(id=${offerta.id})}">
+									<i class="fas fa-edit"></i></a>
+							</td>
+
 							<td>
 								<form id="delete-offerta" th:action="@{'/offerte/delete/{id}'(id=${offerta.id})}"
 									method="post" style="display: inline;" sec:authorize="hasAuthority('ADMIN')">
@@ -198,9 +202,10 @@
 						</tr>
 					</tbody>
 				</table>
-			<div th:if="${pizza.offerte == null or #lists.isEmpty(pizza.offerte)}" >
-				<span class="d-flex justify-content-center text-align-center p-3"> Non ci sono offerte per questa pizza </span>
-			</div>
+				<div th:if="${pizza.offerte == null or #lists.isEmpty(pizza.offerte)}">
+					<span class="d-flex justify-content-center text-align-center p-3"> Non ci sono offerte per questa
+						pizza </span>
+				</div>
 			</div>
 
 
@@ -209,8 +214,9 @@
 		</div>
 		<div class="d-flex justify-content-evenly btn-back">
 
-			<a class="btn btn-success" th:href="@{/pizze/{id}/offerte(id=${pizza.id})} sec:authorize="hasAuthority('ADMIN')"">
-				<i class="fas fa-edit"></i> Nuova Offerta
+			<a class="btn btn-success" th:href="@{/offerte/crea(pizzaId=${pizza.id})}"
+				sec:authorize="hasAuthority('ADMIN')">
+				<i class=" fas fa-edit"></i> Nuova Offerta
 			</a>
 
 			<a class="btn btn-primary" th:href="@{/pizze}" role="button">
@@ -218,7 +224,7 @@
 			</a>
 
 		</div>
-		
+
 
 
 		<div th:replace="~{fragments :: scripts}"></div>
